@@ -12,7 +12,9 @@ The word list have to be in the same folder as the main python file
 # How it works
 
 Use it and found out 
-But the spammer uses 2 sec delay between each message to prevend discord rate limiting your account 
+
+The spammer uses 2 sec delay between each message to prevend discord rate limiting your account 
+
 If you want add more lines to the `words.txt` 
 
 What does the `words.txt` contains rn?
