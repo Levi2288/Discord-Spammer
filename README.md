@@ -5,6 +5,10 @@ Its a simpe discord spammer that support reading from file (for custom stuff) an
 
 The word list have to be in the same folder as the main python file
 
+# Install
+
+`pip install colorama `
+
 # Usage
 
 `py main.py`
