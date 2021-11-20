@@ -31,7 +31,7 @@ What does the `words.txt` contains rn?
 
 `Entire Shrek Movie Script`
 
-the file is more then 3500 line long so u can spam for a long time or use just random string generation.
+the file is more then 3500 line long so u can spam for a long time or just use random string generation.
 
 # Can i get banend for this?
 
