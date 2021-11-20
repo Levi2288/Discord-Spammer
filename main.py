@@ -63,7 +63,6 @@ def main():
     time.sleep(3)
     
     counter = 0
-    randomstring = ''
     if mode == 1:
         with open("words.txt", "r") as a_file:
             for line in a_file:
@@ -88,6 +87,7 @@ def main():
                 main()
     elif mode == 2:
         while counter <= msgsend:
+            randomstring = ''
             for i in range(0, 75):
                 randomstring += random.choice(characters)
             epicness = PrePairMSG(token, channel_id, randomstring)
