@@ -6,6 +6,8 @@ import random
 import time
 init(convert=True)
 
+# coding=<ASCII>
+
 msgid = 0
 max_length = 75
 characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'
@@ -35,9 +37,10 @@ def clear():
 def main():
 
     num_lines = sum(1 for line in open('words.txt'))
-    print(Fore.CYAN + "-"*50)
+    print(Fore.CYAN + "-"*85)
+    print(Fore.CYAN + f" ██████╗  ██████╗    ███████╗██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗██████╗\n ██╔══██╗██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝██╔══██╗\n ██║  ██║██║         ███████╗██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██████╔╝\n ██║  ██║██║         ╚════██║██╔═══╝ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗\n ██████╔╝╚██████╗    ███████║██║     ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║\n ╚═════╝  ╚═════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═")
     print(Fore.CYAN + "Script made by: Levi2288 | Advanced discord spammer")
-    print(Fore.CYAN + "-"*50)
+    print(Fore.CYAN + "-"*85)
     print()
     print(Fore.RED + "Modes: 1 = read messages from word list | 2 = random strings")
     print(Style.RESET_ALL)
