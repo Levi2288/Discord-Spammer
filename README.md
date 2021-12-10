@@ -33,8 +33,8 @@ What does the `words.txt` contains rn?
 
 the file is more then 3500 line long so u can spam for a long time or just use random string generation.
 
-# Can i get banend for this?
+# Can i get banned for this?
 
-Yes you can get baned for automaticating your account
+Yes you can get banned for automaticating your account
 
 Read about this here: [Discord TOS]
