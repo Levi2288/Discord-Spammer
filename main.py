@@ -53,8 +53,14 @@ def main():
         print(Fore.RED + f"If you are using Msg mode 1 your max messages cant be more then \"{num_lines}\"")
         print(Style.RESET_ALL)
         msgsend =  int(input("Messages to send (number):"))
+        print()
+        print(Fore.RED + f"File name or path. Example: (words.txt)")
+        print(Style.RESET_ALL)
+        file = input("File With the Worlds:")
     elif mode == 2:
         msgsend =  int(input("Messages to send (number):"))
+    
+    
     print(Style.RESET_ALL)
     print()
     print()
@@ -65,9 +71,11 @@ def main():
     print(Fore.GREEN + f"Start in 3 seconds")
     time.sleep(3)
     
+    epicness = PrePairMSG(token, channel_id, "Advanced Dc spammer starting... Made by: Levi2288")
+    epicness.execute()
     counter = 0
     if mode == 1:
-        with open("words.txt", "r") as a_file:
+        with open(file, "r") as a_file:
             for line in a_file:
                 if counter < msgsend :
                     message = line.strip()
