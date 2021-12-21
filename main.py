@@ -3,14 +3,18 @@ import sys
 from colorama import Fore, Back, Style, init
 import os
 import random 
+from random import randint
 import time
 init(convert=True)
 
-# coding=<ASCII>
+# -*- coding: ascii -*-
+
+version = "2.0 Dev"
+build = "12" 
 
 msgid = 0
 max_length = 75
-characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'
+characters = ' !"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{|}'
 
 class PrePairMSG:
     
@@ -30,13 +34,37 @@ class PrePairMSG:
 def random_string(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
    
-def clear():
+def start_add(token, channel_id):
 
-    print() * 150
+    start_msg = randint(1, 5)
+    if start_msg == 1:
+        epicness = PrePairMSG(token, channel_id, "Advanced Dc spammer starting... Made by: Levi2288")
+        epicness.execute()
+        
+    elif start_msg == 2:
+        epicness = PrePairMSG(token, channel_id, "Ladies and gentlemen Advanced spammer. Still on top")
+        epicness.execute()
+        
+    elif start_msg == 3:
+        epicness = PrePairMSG(token, channel_id, "Be the best or cry like the rest. Advanced DC spammer")
+        epicness.execute()
+        
+    elif start_msg == 4:
+        epicness = PrePairMSG(token, channel_id, "No im not using Advanced DC spammer, i can just type at lightspeed :smirk:")
+        epicness.execute()
+        
+    elif start_msg == 5:
+        epicness = PrePairMSG(token, channel_id, "Still #1 | Advanced spammer")
+        epicness.execute()
+        
+    time.sleep(2.1)
+    epicness = PrePairMSG(token, channel_id, f"---------------Version: {version} | Build: {build}---------------")
+    epicness.execute()
+    time.sleep(1)
+   
     
 def main():
 
-    num_lines = sum(1 for line in open('words.txt'))
     print(Fore.CYAN + "-"*85)
     print(Fore.CYAN + f" ██████╗  ██████╗    ███████╗██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗██████╗\n ██╔══██╗██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝██╔══██╗\n ██║  ██║██║         ███████╗██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██████╔╝\n ██║  ██║██║         ╚════██║██╔═══╝ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗\n ██████╔╝╚██████╗    ███████║██║     ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║\n ╚═════╝  ╚═════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═")
     print(Fore.CYAN + "Script made by: Levi2288 | Advanced discord spammer")
@@ -49,6 +77,8 @@ def main():
     token = input("Token:")
     channel_id = int(input("Channel ID:"))
     if mode == 1:
+        file = input("File With the Worlds:")
+        num_lines = sum(1 for line in open(file))
         print()
         print(Fore.RED + f"If you are using Msg mode 1 your max messages cant be more then \"{num_lines}\"")
         print(Style.RESET_ALL)
@@ -56,7 +86,6 @@ def main():
         print()
         print(Fore.RED + f"File name or path. Example: (words.txt)")
         print(Style.RESET_ALL)
-        file = input("File With the Worlds:")
     elif mode == 2:
         msgsend =  int(input("Messages to send (number):"))
     
@@ -69,10 +98,8 @@ def main():
     print(Fore.GREEN + f"Messages to send: {msgsend}")
     print()
     print(Fore.GREEN + f"Start in 3 seconds")
-    time.sleep(3)
-    
-    epicness = PrePairMSG(token, channel_id, "Advanced Dc spammer starting... Made by: Levi2288")
-    epicness.execute()
+     
+    start_add(token, channel_id)
     counter = 0
     if mode == 1:
         with open(file, "r") as a_file:
@@ -81,7 +108,7 @@ def main():
                     message = line.strip()
                     epicness = PrePairMSG(token, channel_id, message)
                     epicness.execute()
-                    print(Fore.GREEN + f"Message sent: {message} | {channel_id}")
+                    print(Fore.GREEN + f"Message {counter} sent: {message} | {channel_id}")
                     time.sleep(2.1)
                     counter+=1
                 else:
@@ -103,7 +130,7 @@ def main():
                 randomstring += random.choice(characters)
             epicness = PrePairMSG(token, channel_id, randomstring)
             epicness.execute()
-            print(f"Message sent: {randomstring} | {channel_id}")
+            print(f"Message {counter} sent: {randomstring} | {channel_id}")
             randomstring = ""
             time.sleep(2.1)
             counter+=1
@@ -113,5 +140,7 @@ def main():
             print(Fore.BLUE + f"Messages sent: {counter}")
             time.sleep(10)
             main()
+            
+            
 if __name__ == '__main__':
     main()
