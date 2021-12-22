@@ -9,28 +9,27 @@ init(convert=True)
 
 # -*- coding: ascii -*-
 
-version = "2.0 Dev"
-build = "12" 
+version = "3.0"
+build = "22" 
 
-msgid = 0
-max_length = 75
+counter = 1
+
 characters = ' !"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{|}'
 
-class PrePairMSG:
+def PrePairMSG(display, token, channel, message):
     
-    def __init__(self, token, channel, message):
-        self.token = token
-        self.channel_id = channel
-        self.message = message
-        self.headers = {"Authorization": token}
+    headers = {"Authorization": token}
 
-    def _generate_message(self, m1):
-        return m1
-
-
-    def execute(self):
-        return requests.post(f'https://discordapp.com/api/v9/channels/{self.channel_id}/messages', headers=self.headers, json={'content': self._generate_message(self.message)})
-
+    try:
+        msg_return = requests.post(f'https://discordapp.com/api/v7/channels/{channel}/messages', headers=headers, json={'content': message})
+        if display == 1:
+            if msg_return.status_code == 200:
+                print(Fore.GREEN + f"[+] Message {counter} sent: {message}")
+            else:
+                print(Fore.RED + f"[-] Message {counter} could not be sent: {message}")
+        
+    except:
+        print(Fore.RED + f"[-] Message {counter} could not be sent | Reason: Unknown")
 def random_string(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
    
@@ -38,33 +37,27 @@ def start_add(token, channel_id):
 
     start_msg = randint(1, 5)
     if start_msg == 1:
-        epicness = PrePairMSG(token, channel_id, "Advanced Dc spammer starting... Made by: Levi2288")
-        epicness.execute()
+        PrePairMSG(0, token, channel_id, "Advanced Dc spammer starting... Made by: Levi2288")
         
     elif start_msg == 2:
-        epicness = PrePairMSG(token, channel_id, "Ladies and gentlemen Advanced spammer. Still on top")
-        epicness.execute()
+        PrePairMSG(0, token, channel_id, "Ladies and gentlemen Advanced spammer. Still on top")
         
     elif start_msg == 3:
-        epicness = PrePairMSG(token, channel_id, "Be the best or cry like the rest. Advanced DC spammer")
-        epicness.execute()
+        PrePairMSG(0, token, channel_id, "Be the best or cry like the rest. Advanced DC spammer")
         
     elif start_msg == 4:
-        epicness = PrePairMSG(token, channel_id, "No im not using Advanced DC spammer, i can just type at lightspeed :smirk:")
-        epicness.execute()
+        PrePairMSG(0, token, channel_id, "No im not using Advanced DC spammer, i can just type at lightspeed :smirk:")
         
     elif start_msg == 5:
-        epicness = PrePairMSG(token, channel_id, "Still #1 | Advanced spammer")
-        epicness.execute()
+        PrePairMSG(0, token, channel_id, "Still #1 | Advanced spammer")
         
     time.sleep(2.1)
-    epicness = PrePairMSG(token, channel_id, f"---------------Version: {version} | Build: {build}---------------")
-    epicness.execute()
+    PrePairMSG(0, token, channel_id, f"---------------Version: {version} | Build: {build}---------------")
     time.sleep(1)
    
     
 def main():
-
+    global counter
     print(Fore.CYAN + "-"*85)
     print(Fore.CYAN + f" ██████╗  ██████╗    ███████╗██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗██████╗\n ██╔══██╗██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝██╔══██╗\n ██║  ██║██║         ███████╗██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██████╔╝\n ██║  ██║██║         ╚════██║██╔═══╝ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗\n ██████╔╝╚██████╗    ███████║██║     ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║\n ╚═════╝  ╚═════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═")
     print(Fore.CYAN + "Script made by: Levi2288 | Advanced discord spammer")
@@ -93,52 +86,56 @@ def main():
     print(Style.RESET_ALL)
     print()
     print()
-    print(Fore.GREEN + f"Token: {token}")
-    print(Fore.GREEN + f"ChannelID: {channel_id}")
-    print(Fore.GREEN + f"Messages to send: {msgsend}")
+    print(Fore.BLUE + f"Token: {token}")
+    print(Fore.BLUE + f"ChannelID: {channel_id}")
+    print(Fore.BLUE + f"Messages to send: {msgsend}")
     print()
-    print(Fore.GREEN + f"Start in 3 seconds")
+    print(Fore.BLUE + f"Start in 3 seconds")
      
     start_add(token, channel_id)
-    counter = 0
     if mode == 1:
         with open(file, "r") as a_file:
             for line in a_file:
                 if counter < msgsend :
                     message = line.strip()
-                    epicness = PrePairMSG(token, channel_id, message)
-                    epicness.execute()
-                    print(Fore.GREEN + f"Message {counter} sent: {message} | {channel_id}")
-                    time.sleep(2.1)
-                    counter+=1
+                    if(len(message) > 0):
+                        PrePairMSG(1, token, channel_id, message)
+                        counter+=1
+                        time.sleep(2.1)
+                    else:
+                        print(Fore.RED + f"[-] Empty String! Skipping...")
                 else:
+                    print(Fore.BLUE + "-"*85)
                     print()
                     print()
-                    print(Fore.BLUE + f"Messages sent: {counter}")
+                    print(Fore.BLUE + f"[i] Messages sent: {counter}")
                     time.sleep(10)
+                    print()
                     main()
             else:
+                print(Fore.BLUE + "-"*85)
                 print()
                 print()
-                print(Fore.BLUE + f"Messages sent: {counter}")
+                print(Fore.BLUE + f"[i] Messages sent: {counter}")
                 time.sleep(10)
+                print()
                 main()
     elif mode == 2:
         while counter <= msgsend:
             randomstring = ''
             for i in range(0, 75):
                 randomstring += random.choice(characters)
-            epicness = PrePairMSG(token, channel_id, randomstring)
-            epicness.execute()
-            print(f"Message {counter} sent: {randomstring} | {channel_id}")
+            PrePairMSG(1, token, channel_id, randomstring)
+            counter+=1
             randomstring = ""
             time.sleep(2.1)
-            counter+=1
         else:
+            print(Fore.BLUE + "-"*85)
             print()
             print()
-            print(Fore.BLUE + f"Messages sent: {counter}")
+            print(Fore.BLUE + f"[i] Messages sent: {counter}")
             time.sleep(10)
+            print()
             main()
             
             
