@@ -12,8 +12,8 @@ failed = 0
 counter = 1
 # -*- coding: ascii -*-
 
-version = "3.0"
-build = "25" 
+version = "3.0 DEV"
+build = "27" 
 
 
 characters = ' !"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{|}'
@@ -39,8 +39,8 @@ def PrePairMSG(display, token, channel, message):
         
     except:
         print(Fore.RED + f"[-] Message {counter} could not be sent | Reason: Unknown")
-def random_string(length):
-   return ''.join(random.choice(string.lowercase) for i in range(length))
+def random_string():
+   return ''.join(random.choice(characters) for i in range(0, random.randint(6,75)))
 
 def job_done():
 
@@ -145,8 +145,9 @@ def main():
     elif mode == 2:
         while counter <= msgsend:
             randomstring = ''
-            for i in range(0, 75):
-                randomstring += random.choice(characters)
+            #for i in range(0, 75):
+            #    randomstring += random.choice(characters)
+            randomstring = random_string()
             PrePairMSG(1, token, channel_id, randomstring)
             counter+=1
             randomstring = ""
