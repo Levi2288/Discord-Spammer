@@ -7,32 +7,54 @@ from random import randint
 import time
 init(convert=True)
 
+sucess = 0
+failed = 0
+counter = 1
 # -*- coding: ascii -*-
 
 version = "3.0"
-build = "22" 
+build = "25" 
 
-counter = 1
 
 characters = ' !"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_abcdefghijklmnopqrstuvwxyz{|}'
 
 def PrePairMSG(display, token, channel, message):
     
+    global sucess
+    global failed
     headers = {"Authorization": token}
 
     try:
-        msg_return = requests.post(f'https://discordapp.com/api/v7/channels/{channel}/messages', headers=headers, json={'content': message})
+        msg_return = requests.post(f'https://discordapp.com/api/v9/channels/{channel}/messages', headers=headers, json={'content': message})
         if display == 1:
             if msg_return.status_code == 200:
                 print(Fore.GREEN + f"[+] Message {counter} sent: {message}")
+                sucess+=1
+            elif msg_return.status_code == 404:
+                print(Fore.RED + f"[-] Message {counter} could not be sent | Reason: Not Found")
+                failed+=1
             else:
-                print(Fore.RED + f"[-] Message {counter} could not be sent: {message}")
+                print(Fore.RED + f"[-] Message {counter} could not be sent | Reason: Unknown")
+                failed+=1
         
     except:
         print(Fore.RED + f"[-] Message {counter} could not be sent | Reason: Unknown")
 def random_string(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
-   
+
+def job_done():
+
+    print(Fore.BLUE + "-"*85)
+    print()
+    print()
+    print(Fore.BLUE + f"[i] Job: Finished")
+    print(Fore.BLUE + f"[i] Messages sent: {sucess}")
+    print(Fore.BLUE + f"[i] Errors: {failed}")
+    time.sleep(10)
+    print()
+    main()
+    
+    
 def start_add(token, channel_id):
 
     start_msg = randint(1, 5)
@@ -55,9 +77,16 @@ def start_add(token, channel_id):
     PrePairMSG(0, token, channel_id, f"---------------Version: {version} | Build: {build}---------------")
     time.sleep(1)
    
-    
+ 
 def main():
     global counter
+    global sucess
+    global failed
+    
+    counter = 1
+    sucess = 0
+    failed = 0
+    
     print(Fore.CYAN + "-"*85)
     print(Fore.CYAN + f" ██████╗  ██████╗    ███████╗██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗██████╗\n ██╔══██╗██╔════╝    ██╔════╝██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝██╔══██╗\n ██║  ██║██║         ███████╗██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██████╔╝\n ██║  ██║██║         ╚════██║██╔═══╝ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗\n ██████╔╝╚██████╗    ███████║██║     ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║\n ╚═════╝  ╚═════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═")
     print(Fore.CYAN + "Script made by: Levi2288 | Advanced discord spammer")
@@ -71,7 +100,12 @@ def main():
     channel_id = int(input("Channel ID:"))
     if mode == 1:
         file = input("File With the Worlds:")
-        num_lines = sum(1 for line in open(file))
+        num_lines = 0
+        with open(file) as infp:
+            for line in infp:
+                if line.strip():
+                    num_lines += 1
+        #num_lines = sum(1 for line in open(file))
         print()
         print(Fore.RED + f"If you are using Msg mode 1 your max messages cant be more then \"{num_lines}\"")
         print(Style.RESET_ALL)
@@ -105,21 +139,9 @@ def main():
                     else:
                         print(Fore.RED + f"[-] Empty String! Skipping...")
                 else:
-                    print(Fore.BLUE + "-"*85)
-                    print()
-                    print()
-                    print(Fore.BLUE + f"[i] Messages sent: {counter}")
-                    time.sleep(10)
-                    print()
-                    main()
+                    job_done()
             else:
-                print(Fore.BLUE + "-"*85)
-                print()
-                print()
-                print(Fore.BLUE + f"[i] Messages sent: {counter}")
-                time.sleep(10)
-                print()
-                main()
+               job_done()
     elif mode == 2:
         while counter <= msgsend:
             randomstring = ''
@@ -130,13 +152,7 @@ def main():
             randomstring = ""
             time.sleep(2.1)
         else:
-            print(Fore.BLUE + "-"*85)
-            print()
-            print()
-            print(Fore.BLUE + f"[i] Messages sent: {counter}")
-            time.sleep(10)
-            print()
-            main()
+            job_done()
             
             
 if __name__ == '__main__':
